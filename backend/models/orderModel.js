@@ -54,7 +54,7 @@ const orderSchema = mongoose.Schema(
             default: 0.0
         },
         isPaid: {
-            type: Bollean,
+            type: Boolean,
             required: true,
             default: false
         },
@@ -62,7 +62,7 @@ const orderSchema = mongoose.Schema(
             type: Date,
         },
         isDelivered: {
-            type: Bollean,
+            type: Boolean,
             required: true,
             default: false
         },

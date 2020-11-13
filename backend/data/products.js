@@ -1,6 +1,5 @@
 const products = [
   {
-    _id: '1',
     name: 'Money Toilet Paper',
     image: '/images/toiletpaper01.jpg',
     description:
@@ -13,7 +12,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '2',
     name: 'Sudoku Toilet Paper',
     image: '/images/toiletpaper02.jpg',
     description:
@@ -26,7 +24,6 @@ const products = [
     numReviews: 8,
   },
   {
-    _id: '3',
     name: 'Black Toilet Paper',
     image: '/images/toiletpaper03.jpg',
     description:
@@ -39,7 +36,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '4',
     name: 'The Gags-Donald Trump Toilet Paper',
     image: '/images/toiletpaper04.jpg',
     description:
@@ -52,7 +48,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '5',
     name: 'Origami Toilet Paper',
     image: '/images/toiletpaper05.jpg',
     description:
@@ -65,7 +60,6 @@ const products = [
     numReviews: 10,
   },
   {
-    _id: '6',
     name: 'Valentine’s Day Toilet Paper',
     image: '/images/toiletpaper06.jpg',
     description:
