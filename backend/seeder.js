@@ -49,6 +49,7 @@ const destoryData = async () => {
     }
 }
 
+//Run "node backend.seeder -d" to delete all data imported
 if (process.argv[2] === '-d') {
     destoryData()
 } else {
