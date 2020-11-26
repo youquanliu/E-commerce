@@ -1,5 +1,6 @@
 import User from '../models/userModel.js'
 import asyncHandler from 'express-async-handler'
+import generateToken from '../utils/generateToken.js'
 
 //@desc Auth user & get token  
 //POST /api/users/login
@@ -15,7 +16,8 @@ const authUser = asyncHandler(async (req, res) => {
             name: user.name,
             email: user.email,
             isAdmin: user.isAdmin,
-            token: null
+            //Return JWT to Brower as payload
+            token: generateToken(user._id),
         })
     } else {
         res.status(401)
