@@ -4,7 +4,7 @@ import { Table, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { listUsers } from '../actions/userActions'
+import { listUsers, deleteUsers } from '../actions/userActions'
 
 const UserListScreen = ({ history }) => {
     const dispatch = useDispatch()
@@ -15,6 +15,9 @@ const UserListScreen = ({ history }) => {
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
 
+    const userDelete = useSelector((state) => state.userDelete)
+    const { success: successDelete } = userDelete
+
     //prevent regular user access admin screen
     useEffect(() => {
         if (userInfo && userInfo.isAdmin) {
@@ -22,10 +25,12 @@ const UserListScreen = ({ history }) => {
         } else {
             history.push('/login')
         }
-    }, [dispatch, history])
+    }, [dispatch, history, successDelete])
 
     const deleteHandler = (id) => {
-        console.log('delete')
+        if (window.confirm('Are you sure you want to delete this user?')) {
+            dispatch(deleteUsers(id))
+        }
     }
 
     return (
@@ -64,7 +69,7 @@ const UserListScreen = ({ history }) => {
                                             </td>
                                             <td>
                                                 <LinkContainer to={`/user/${user._id}/edit`}>
-                                                    <Button variant='light' className='btn-sm'>
+                                                    <Button variant='light' className='btn-sm mr-2'>
                                                         <i className='fas fa-edit'></i>
                                                     </Button>
                                                 </LinkContainer>
