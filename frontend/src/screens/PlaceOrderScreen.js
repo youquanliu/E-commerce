@@ -95,7 +95,10 @@ const PlaceOrderScreen = ({ history }) => {
                                                     {/* <Link to={`/product/${item.product}`}>
                                                         {item.name}
                                                     </Link> */}
+                                                    {item.name}
                                                 </Col>
+
+
                                                 <Col md={4}>
                                                     {item.qty} x ${item.price} = ${item.qty * item.price}
                                                 </Col>

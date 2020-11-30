@@ -30,10 +30,10 @@ const OrderScreen = ({ match }) => {
     }
 
     useEffect(() => {
-        if(!order || order._id !== orderId) {
+        if (!order || order._id !== orderId) {
             dispatch(getOrderDetails(orderId))
         }
-    }, [order, orderId]) 
+    }, [order, orderId])
 
     return loading ? (
         <Loader />
@@ -93,11 +93,13 @@ const OrderScreen = ({ match }) => {
                                                     <Col ld={1}>
                                                         <Image src={item.image} alt={item.name} fluid rounded />
                                                     </Col>
-                                                    {/* <Col>
-                          <Link to={`/product/${item.product}`}>
-                            {item.name}
-                          </Link>
-                        </Col> */}
+                                                    <Col>
+                                                        {/* <Link to={`/product/${item.product}`}>
+                                                            {item.name}
+                                                        </Link> */}
+                                                        {item.name}
+                                                    </Col>
+
                                                     <Col md={4}>
                                                         {item.qty} x ${item.price} = ${item.qty * item.price}
                                                     </Col>

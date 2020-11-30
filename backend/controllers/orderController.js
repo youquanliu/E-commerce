@@ -36,7 +36,7 @@ const getOrderById = asyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id).populate(
         'user',
         'name email'
-        )
+    )
 
     if (order) {
         res.json(order)
@@ -46,4 +46,28 @@ const getOrderById = asyncHandler(async (req, res) => {
     }
 })
 
-export { addOrderItems, getOrderById }
+//@desc Update order to paid
+//@toute GET /api/orders/:id/pay
+//@access Private
+const updateOrderToPaid = asyncHandler(async (req, res) => {
+
+    const order = await Order.findById(req.params.id)
+
+    if (order) {
+        order.isPaid = true
+        order.paidAt = Date.now()
+        order.paymentResult = {
+            id: req.body.id,
+            status: req.body.status,
+            update_time: req.body.ypdate_time,
+            email_address: req.body.payer.email_address
+        }
+        const updateOrder = await order.save()
+        res.json(updateOrder)
+
+    } else {
+        res.status(404)
+        throw new Error('Order not found')
+    }
+})
+export { addOrderItems, getOrderById, updateOrderToPaid }
