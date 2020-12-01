@@ -189,7 +189,7 @@ const OrderScreen = ({ match }) => {
                                     <ListGroup.Item>
                                         <h4 className="card-header">Notice</h4>
                                     </ListGroup.Item>
-                                    <ListGroup.Item>
+                                    <ListGroup.Item className="text-info">
                                         <p className="card-text">PayPal implmented here is Sandbox version, feel free to "pay" for your favoriate toliet paper order with no charge</p>
                                         <p className="card-text">Log PayPal in with : </p>
                                         <p className="card-text">Email: DummyEmail@example.com</p>
