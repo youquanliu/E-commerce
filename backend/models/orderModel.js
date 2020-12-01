@@ -6,7 +6,7 @@ const orderSchema = mongoose.Schema(
         user: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
-            ref: 'User'
+            ref: 'User',
         },
         //one order has many items; one item has many products
         orderItems: [
@@ -18,10 +18,11 @@ const orderSchema = mongoose.Schema(
                 product: {
                     type: mongoose.Schema.Types.ObjectId,
                     required: true,
-                    ref: 'Product'
+                    ref: 'Product',
                 },
-            }
+            },
         ],
+
         shippingAddress: {
             address: { type: String, required: true },
             city: { type: String, required: true },
@@ -30,7 +31,7 @@ const orderSchema = mongoose.Schema(
         },
         paymentMethod: {
             type: String,
-            required: true
+            required: true,
         },
         paymentResult: {
             id: { type: String },
@@ -41,22 +42,22 @@ const orderSchema = mongoose.Schema(
         taxPrice: {
             type: Number,
             required: true,
-            default: 0.0
+            default: 0.0,
         },
         shippingPrice: {
             type: Number,
             required: true,
-            default: 0.0
+            default: 0.0,
         },
         totalPrice: {
             type: Number,
             required: true,
-            default: 0.0
+            default: 0.0,
         },
         isPaid: {
             type: Boolean,
             required: true,
-            default: false
+            default: false,
         },
         paidAt: {
             type: Date,
@@ -64,12 +65,11 @@ const orderSchema = mongoose.Schema(
         isDelivered: {
             type: Boolean,
             required: true,
-            default: false
+            default: false,
         },
         deliveredAt: {
             type: Date,
         },
-
     },
     {
         timestamps: true

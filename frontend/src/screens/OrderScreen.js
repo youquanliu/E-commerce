@@ -1,21 +1,28 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
+import axios from 'axios'
+import { PayPalButton } from "react-paypal-button-v2";
+import { Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
 import { Link } from 'react-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-import { shippingAddress } from '../actions/cartActions'
-import { getOrderDetails } from '../actions/orderActions'
+// import { shippingAddress } from '../actions/cartActions'
+import { getOrderDetails, payOrder } from '../actions/orderActions'
+import { ORDER_PAY_RESET } from '../constants/orderConstants'
 
 const OrderScreen = ({ match }) => {
 
     const orderId = match.params.id
-
+    const [sdkReady, setSdkReady] = useState(false)
     const dispatch = useDispatch('')
 
     //Get order info from state
     const orderDetails = useSelector(state => state.orderDetails)
     const { order, loading, error } = orderDetails
+
+    const orderPay = useSelector(state => state.orderPay)
+    const { loading: loadingPay, success: successPay } = orderPay
+
 
     if (!loading) {
         //calcuate price 
@@ -30,11 +37,39 @@ const OrderScreen = ({ match }) => {
     }
 
     useEffect(() => {
-        if (!order || order._id !== orderId) {
-            dispatch(getOrderDetails(orderId))
-        }
-    }, [order, orderId])
 
+        const addPayPalScript = async () => {
+            const { data: clientId } = await axios.get('/api/config/paypal')
+            const script = document.createElement('script')
+            script.type = 'text/javascript'
+            script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`
+            script.async = true
+            script.onload = () => {
+                setSdkReady(true)
+            }
+            document.body.appendChild(script)
+        }
+        //Order is not there Or usre has payed, dispatch order details
+        if (!order || successPay) {
+            //Rest stage to avoid infinite loop(keep refreshing page)
+            dispatch({ type: ORDER_PAY_RESET })
+            dispatch(getOrderDetails(orderId))
+            //Check is paid or not
+        } else if (!order.isPaid) {
+            //Check paypal script exist
+            if (!window.paypal) {
+                addPayPalScript()
+            } else {
+                setSdkReady(true)
+            }
+        }
+    }, [dispatch, order, orderId, successPay])
+
+    //Handle pay order action
+    const successPaymentHandler = (paymentResult) => {
+        console.log(paymentResult)
+        dispatch(payOrder(orderId, paymentResult))
+    }
     return loading ? (
         <Loader />
     ) : error ? (
@@ -94,9 +129,6 @@ const OrderScreen = ({ match }) => {
                                                         <Image src={item.image} alt={item.name} fluid rounded />
                                                     </Col>
                                                     <Col>
-                                                        {/* <Link to={`/product/${item.product}`}>
-                                                            {item.name}
-                                                        </Link> */}
                                                         {item.name}
                                                     </Col>
 
@@ -141,7 +173,29 @@ const OrderScreen = ({ match }) => {
                                         <Col>${order.totalPrice}</Col>
                                     </Row>
                                 </ListGroup.Item>
+                                {!order.isPaid && (
+                                    <ListGroup.Item>
+                                        {loadingPay && <Loader />}
+                                        {!sdkReady ? <Loader /> : (
+                                            <PayPalButton
+                                                amount={order.totalPrice}
+                                                onSuccess={successPaymentHandler}
+                                            />
+                                        )}
+                                    </ListGroup.Item>
+                                )}
 
+                                <ListGroup className="card text-black bg-danger mb-3">
+                                    <ListGroup.Item>
+                                        <h4 className="card-header">Notice</h4>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item>
+                                        <p className="card-text">PayPal implmented here is Sandbox version, feel free to "pay" for your favoriate toliet paper order with no charge</p>
+                                        <p className="card-text">Log PayPal in with : </p>
+                                        <p className="card-text">Email: DummyEmail@example.com</p>
+                                        <p className="card-text">Password: 1*UjDU6*</p>
+                                    </ListGroup.Item>
+                                </ListGroup>
                             </ListGroup>
                         </Card>
                     </Col>
