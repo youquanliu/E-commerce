@@ -64,7 +64,7 @@ const OrderScreen = ({ match, history }) => {
             document.body.appendChild(script)
         }
         //Order is not there Or usre has payed, dispatch order details
-        if (!order || successPay || successDeliver) {
+        if (!order || successPay || successDeliver || order._id !== orderId) {
             //Rest stage to avoid infinite loop(keep refreshing page)
             dispatch({ type: ORDER_PAY_RESET })
             dispatch(getOrderDetails(orderId))
