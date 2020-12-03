@@ -4,6 +4,7 @@ import { Container } from 'react-bootstrap'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import HomeScreen from './screens/HomeScreen'
+import AdminIndfoScreen from './screens/AdminInfoScreen'
 import ProductScreen from './screens/ProductScreen'
 import CartScreen from './screens/CartScreen'
 import LoginScreen from './screens/LoginScreen'
@@ -31,6 +32,7 @@ const App = () => {
             {/* Page */}
             <Route path='/page/:pageNumber' component={HomeScreen} exact />
             <Route path='/search/:keyword/page/:pageNumber' component={HomeScreen} exact />
+            <Route path='/admininfo' component={AdminIndfoScreen} />
 
             <Route path='/cart/:id?' component={CartScreen} />
             <Route path='/order/:id' component={OrderScreen} />
@@ -46,8 +48,8 @@ const App = () => {
             {/* Admin Screens */}
             <Route path='/admin/userList' component={UserListScreen} />
             <Route path='/admin/user/:id/edit' component={UserEditScreen} />
-            <Route path='/admin/productList' component={ProductListScreen} exact/>
-            <Route path='/admin/productList/:pageNumber' component={ProductListScreen} exact/>
+            <Route path='/admin/productList' component={ProductListScreen} exact />
+            <Route path='/admin/productList/:pageNumber' component={ProductListScreen} exact />
 
             <Route path='/admin/product/:id/edit' component={ProductEditScreen} />
             <Route path='/admin/orderList' component={OrderListScreen} />

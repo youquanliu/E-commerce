@@ -40,9 +40,18 @@ const getProductById = asyncHandler(async (req, res) => {
         throw new Error('Product not found')
     }
 })
+
+//@desc Get Top rated products
+//@route GET /api/products/top
+//@access public
+const getTopProduct = asyncHandler(async (req, res) => {
+    const products = await Product.find({}).sort({ rating: -1 }).limit(4)
+    res.json(products)
+})
+
 //@desc Delete a products  
 //@route DELETE /api/products/:id
-//@access Admin / rivate
+//@access Admin/private
 const deleteProduct = asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id)
 
@@ -102,7 +111,7 @@ const updateProduct = asyncHandler(async (req, res) => {
 
 //@desc Create new review
 //@route POST /api/products/:id/reviews
-//@access private
+//@access Admin / private
 const createProductReview = asyncHandler(async (req, res) => {
 
     const { rating, comment } = req.body
@@ -136,8 +145,11 @@ const createProductReview = asyncHandler(async (req, res) => {
         throw new Error('Product not found')
     }
 })
+
+
 export {
     getProducts,
+    getTopProduct,
     getProductById,
     deleteProduct,
     createProduct,

@@ -31,10 +31,12 @@ const Header = () => {
 
                         <Nav className="ml-auto">
                             <LinkContainer to="/cart">
-                                <Nav.Link><i className='fas fa-shopping-cart mr-1'></i>Cart</Nav.Link>
+                                <Nav.Link className='mr-2'>
+                                    <i className='fas fa-shopping-cart mr-1'></i>Cart
+                                    </Nav.Link>
                             </LinkContainer>
                             {userInfo ? (
-                                <NavDropdown title={userInfo.name} id='username'>
+                                <NavDropdown title={userInfo.name} id='username' className='mr-3'>
                                     <LinkContainer to='/profile'>
                                         <NavDropdown.Item>Profile</NavDropdown.Item>
                                     </LinkContainer>
@@ -58,6 +60,9 @@ const Header = () => {
                                     </LinkContainer>
                                 </NavDropdown>
                             )}
+                            <LinkContainer to="/admininfo">
+                                <Nav.Link><i className='fas fa-question-circle mr-1'></i>Admin</Nav.Link>
+                            </LinkContainer>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
