@@ -26,8 +26,13 @@ const App = () => {
         <main className='py-5'>
           <Container>
             <Route path='/' component={HomeScreen} exact />
-            <Route path='/search/:keyword' component={HomeScreen} />
+            {/* Search route */}
+            <Route path='/search/:keyword' component={HomeScreen} exact />
+            {/* Page */}
+            <Route path='/page/:pageNumber' component={HomeScreen} exact />
+            <Route path='/search/:keyword/page/:pageNumber' component={HomeScreen} exact />
 
+            <Route path='/cart/:id?' component={CartScreen} />
             <Route path='/order/:id' component={OrderScreen} />
             <Route path='/shipping' component={ShippingScreen} />
             <Route path='/payment' component={PaymentScreen} />
@@ -37,12 +42,13 @@ const App = () => {
             <Route path='/register' component={RegisterScreen} />
             <Route path='/profile' component={ProfileScreen} />
             <Route path='/product/:id' component={ProductScreen} />
-            <Route path='/cart/:id?' component={CartScreen} />
 
             {/* Admin Screens */}
             <Route path='/admin/userList' component={UserListScreen} />
             <Route path='/admin/user/:id/edit' component={UserEditScreen} />
-            <Route path='/admin/productList' component={ProductListScreen} />
+            <Route path='/admin/productList' component={ProductListScreen} exact/>
+            <Route path='/admin/productList/:pageNumber' component={ProductListScreen} exact/>
+
             <Route path='/admin/product/:id/edit' component={ProductEditScreen} />
             <Route path='/admin/orderList' component={OrderListScreen} />
 

@@ -211,6 +211,8 @@ const ProductScreen = ({ history, match }) => {
                             </Row>
                         </>
                     )}
+            {console.log('%c Reviews : ', 'color:orange; font-wight:bold; font-size:20px')}
+            {console.table(product.reviews)}
         </>
     )
 }

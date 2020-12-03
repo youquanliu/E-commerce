@@ -46,6 +46,8 @@ const OrderListScreen = ({ history }) => {
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {console.log('%c Orders:', 'color:orange; font-wight:bold; font-size:20px')}
+                                    {console.table(orders)}
                                     {orders.map((order) => (
                                         <tr key={order._id}>
                                             <td>{order._id}</td>

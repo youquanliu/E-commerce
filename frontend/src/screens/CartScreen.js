@@ -13,7 +13,6 @@ const CartScreen = ({ match, location, history }) => {
 
     const cart = useSelector((state) => state.cart)
     const { cartItems } = cart
-    //console.log({ cartItems })
 
     useEffect(() => {
         if (productId) {
@@ -39,6 +38,10 @@ const CartScreen = ({ match, location, history }) => {
                     </Message>
                 ) : (
                         <ListGroup variant='flush'>
+
+                            {console.log('%c Item In Cart: ', 'color:orange; font-wight:bold; font-size:20px')}
+                            {console.table(cartItems)}
+
                             {cartItems.map(item => (
                                 <ListGroup.Item key={item.product}>
                                     <Row>

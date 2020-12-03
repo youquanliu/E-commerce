@@ -53,6 +53,8 @@ const UserListScreen = ({ history }) => {
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {console.log('%c Users: ', 'color:orange; font-wight:bold; font-size:20px')}
+                                    {console.table(users)}
                                     {users.map((user) => (
                                         <tr key={user._id} className="table-light">
                                             <td>{user._id}</td>

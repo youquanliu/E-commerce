@@ -60,6 +60,11 @@ const ProfileScreen = ({ location, history }) => {
                 {success && <Message variant='success'>Profile Updated</Message>}
                 {loading && <Loader />}
 
+                {console.log('%c User: ', 'color:orange; font-wight:bold; font-size:20px')}
+                {console.table(user)}
+                {console.log('%c Orders: ', 'color:blue; font-wight:bold; font-size:20px')}
+                {console.table(orders)}
+
                 <Form onSubmit={submitHandler}>
                     <Form.Group controlId='name'>
                         <Form.Label>Name</Form.Label>

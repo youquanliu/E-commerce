@@ -2,21 +2,29 @@ import Product from '../models/productModel.js'
 import asyncHandler from 'express-async-handler'
 
 //@desc Fetch all products  
-//@route GET /api/products
+//@route GET /api/products?keyword
 //@access public
 const getProducts = asyncHandler(async (req, res) => {
-
+    //Search bar code
     const keyword = req.query.keyword
         ? {
             name: {
                 $regex: req.query.keyword,
-                $options: 'i',
+                $options: 'i', //case insensitive
             },
         }
         : {}
+    //Pagination code
+    //***********************       amount of products would show on page     ********************************
+    const pageSize = 8
+    const page = Number(req.query.pageNumber) || 1
 
+    const count = await Product.countDocuments({ ...keyword })
     const products = await Product.find({ ...keyword })
-    res.json(products)
+        .limit(pageSize)
+        .skip(pageSize * (page - 1))    //skip products in previous page
+
+    res.json({ products, page, pages: Math.ceil(count / pageSize) })
 })
 
 //@desc Fetch products by ID  
