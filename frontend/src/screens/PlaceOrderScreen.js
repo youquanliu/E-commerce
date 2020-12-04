@@ -7,7 +7,7 @@ import Message from '../components/Message'
 import { shippingAddress } from '../actions/cartActions'
 import { createOrder } from '../actions/orderActions'
 import { ORDER_CREATE_RESET } from '../constants/orderConstants'
-import { USER_DETAILS_RESET } from '../constants/userConstants'
+import { USER_DETAIL_RESET } from '../constants/userConstants'
 
 const PlaceOrderScreen = ({ history }) => {
 
@@ -48,7 +48,7 @@ const PlaceOrderScreen = ({ history }) => {
         if (success) {
             history.push(`/order/${order._id}`)
             dispatch({ type: ORDER_CREATE_RESET })
-            dispatch({ type: USER_DETAILS_RESET })
+            dispatch({ type: USER_DETAIL_RESET })
         }
         // eslint-disable-next-line
     }, [history, success])
