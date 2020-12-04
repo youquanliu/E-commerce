@@ -7,12 +7,18 @@ import Message from '../components/Message'
 import { shippingAddress } from '../actions/cartActions'
 import { createOrder } from '../actions/orderActions'
 import { ORDER_CREATE_RESET } from '../constants/orderConstants'
+import { USER_DETAILS_RESET } from '../constants/userConstants'
 
 const PlaceOrderScreen = ({ history }) => {
 
     const cart = useSelector(state => state.cart)
     const dispatch = useDispatch('')
 
+    if (!cart.shippingAddress.address) {
+        history.push('/shipping')
+    } else if (!cart.paymentMethod) {
+        history.push('/payment')
+    }
     //calcuate price 
     const addDecimals = (num) => {
         return (Math.round(num * 100) / 100).toFixed(2)
@@ -42,6 +48,7 @@ const PlaceOrderScreen = ({ history }) => {
         if (success) {
             history.push(`/order/${order._id}`)
             dispatch({ type: ORDER_CREATE_RESET })
+            dispatch({ type: USER_DETAILS_RESET })
         }
         // eslint-disable-next-line
     }, [history, success])

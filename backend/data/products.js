@@ -187,6 +187,18 @@ const products = [
     countInStock: 69,
     rating: 3.5,
     numReviews: 4,
+  }, 
+  {
+    name: 'Test',
+    image: '/images/sample.png',
+    description:
+      'this is a sample item',
+    brand: 'Dark',
+    category: 'Toliet Paper',
+    price: 5.29,
+    countInStock: 69,
+    rating: 3.5,
+    numReviews: 4,
   },
 
 ]
