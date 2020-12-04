@@ -3,7 +3,7 @@
 > Build an [Toilet Paper Depot](https://explore-bloor.herokuapp.com) eCommerce platform from the ground up with React, Redux, Express & MongoDB
 
 ![Page One](frontend/public/images/Screenshot1.png?raw=true "First page of game")
-![Page Two](public/images/Screenshot2.png?raw=true "Second page of game")
+![Page Two](frontend/public/images/Screenshot2.png?raw=true "Second page of game")
 
 
 ## Features
@@ -24,7 +24,7 @@
 
 ## Click to [view the page](https://explore-bloor.herokuapp.com)
 
-### Env Variables
+#### Env Variables
 
 Create a .env file in then root and add the following
 
@@ -36,14 +36,14 @@ JWT_SECRET = 'abc123'
 PAYPAL_CLIENT_ID = your paypal client id
 ```
 
-### Install Dependencies (frontend & backend)
+#### Install Dependencies (frontend & backend)
 
 ```
 npm install
 cd frontend
 npm install
 ```
-### Run
+#### Run
 
 ```
 # Run frontend (:3000) & backend (:5000)
@@ -52,7 +52,7 @@ npm run dev
 # Run backend only
 npm run server
 ```
-## Build & Deploy
+#### Build & Deploy
 
 ```
 # Create frontend prod build
