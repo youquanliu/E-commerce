@@ -25,8 +25,8 @@ const ProductListScreen = ({ history, match }) => {
 
     const { loading: loadingDelete,
         error: errorDelete,
-        success: successDelete
-    } = productDelete
+        success: successDelete,
+   } = productDelete
 
     const productCreate = useSelector((state) => state.productCreate)
     const { loading: loadingCreate,
