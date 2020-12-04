@@ -69,6 +69,8 @@ const ProductScreen = ({ history, match }) => {
                 <Message variant='danger'>{error}</Message>
             ) : (
                         <>
+                            {console.log('%c Reviews : ', 'color:orange; font-wight:bold; font-size:20px')}
+                            {console.table(product.reviews)}
                             <Meta title={product.name} />
                             <Row>
                                 <Col md={6}>
@@ -218,8 +220,6 @@ const ProductScreen = ({ history, match }) => {
                             </Row>
                         </>
                     )}
-            {console.log('%c Reviews : ', 'color:orange; font-wight:bold; font-size:20px')}
-            {console.table(product.reviews)}
         </>
     )
 }

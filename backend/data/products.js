@@ -10,6 +10,13 @@ const products = [
     countInStock: 100,
     rating: 4.5,
     numReviews: 12,
+    reviews: {
+      name: "Frank",
+      comment: "It makes me feel rich",
+      createdAt: '2020-12-02T20:29:30.022+00:00',
+      rating: 5,
+      user: '5fc6ad7427942d344c8f43d2'
+    }
   },
   {
     name: 'Cactus Toilet Paper',

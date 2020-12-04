@@ -67,7 +67,7 @@ export const logout = () => (dispatch) => {
     dispatch({ type: USER_DETAIL_RESET })
     dispatch({ type: ORDER_LIST_MY_RESET })
     dispatch({ type: USER_LIST_RESET })
-    document.location.href = '/'
+    document.location.href = '/login'
 }
 
 //------------------------register
