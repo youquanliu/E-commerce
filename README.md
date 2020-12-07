@@ -1,6 +1,6 @@
 # E-commerce
 
-> Build an [Toilet Paper Depot](https://explore-bloor.herokuapp.com) eCommerce platform from the ground up with React, Redux, Express & MongoDB
+> Build an [Toilet Paper Depot](https://toliet-paper-depot.herokuapp.com) eCommerce platform from the ground up with React, Redux, Express & MongoDB
 
 ![Page One](frontend/public/images/Screenshot1.png?raw=true "First page of game")
 ![Page Two](frontend/public/images/Screenshot2.png?raw=true "Second page of game")
@@ -22,7 +22,7 @@
 - PayPal / credit card integration in sandbox
 - Database seeder (products & users)
 
-## Click to [view the page](https://toliet-paper-depot.herokuapp.com/)
+## Click to [view the page](https://toliet-paper-depot.herokuapp.com)
 
 #### Env Variables
 
