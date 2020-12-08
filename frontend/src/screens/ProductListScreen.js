@@ -7,7 +7,6 @@ import Loader from '../components/Loader'
 import Paginate from '../components/Paginate'
 import { listProducts, deleteProduct, createProduct } from '../actions/productActions'
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
-import { useHistory } from 'react-router-dom'
 
 const ProductListScreen = ({ history, match }) => {
     const pageNumber = match.params.pageNumber || 1
@@ -26,13 +25,15 @@ const ProductListScreen = ({ history, match }) => {
     const { loading: loadingDelete,
         error: errorDelete,
         success: successDelete,
-   } = productDelete
+    } = productDelete
 
     const productCreate = useSelector((state) => state.productCreate)
-    const { loading: loadingCreate,
+    const {
+        loading: loadingCreate,
         error: errorCreate,
         success: successCreate,
-        product: createdProduct } = productCreate
+        product: createdProduct,
+    } = productCreate
 
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
@@ -45,16 +46,17 @@ const ProductListScreen = ({ history, match }) => {
             history.push('/login')
         }
         if (successCreate) {
-            history.push(`admin/products/${createdProduct._id}/edit`)
+            history.push(`/admin/product/${createdProduct._id}/edit`)
         } else {
             dispatch(listProducts('', pageNumber))
         }
-    }, [dispatch,
+    }, [
+        dispatch,
         history,
         userInfo,
         successDelete,
-        createdProduct,
         successCreate,
+        createdProduct,
         pageNumber
     ])
 

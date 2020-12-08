@@ -120,6 +120,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
         })
     }
 }
+
 export const createProduct = () => async (dispatch, getState) => {
     try {
         dispatch({
@@ -132,16 +133,15 @@ export const createProduct = () => async (dispatch, getState) => {
 
         const config = {
             headers: {
-                'Content-Type': 'application/json',
                 Authorization: `Bearer ${userInfo.token}`,
             },
         }
 
-        const { data } = await axios.post(`/api/products/`, {}, config)
+        const { data } = await axios.post(`/api/products`, {}, config)
 
         dispatch({
             type: PRODUCT_CREATE_SUCCESS,
-            payload: data
+            payload: data,
         })
     } catch (error) {
         dispatch({
