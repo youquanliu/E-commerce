@@ -56,9 +56,9 @@ const HomeScreen = ({ match }) => {
               </Col>
             ))}
             {/* Dummy below ----------------------- */}
-            {Product_dummy.map((dummy_product) => (
-              <Col key={dummy_product._id} sm={12} md={6} lg={4} xl={3}>
-                <Product product_dummy={dummy_product} />
+            {Product_dummy.map((product) => (
+              <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                <Product product={product} />
               </Col>
             ))}
           </Row>
