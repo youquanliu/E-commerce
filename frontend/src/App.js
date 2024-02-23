@@ -1,78 +1,39 @@
-import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Container } from "react-bootstrap";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import HomeScreen from "./screens/HomeScreen";
-import AdminIndfoScreen from "./screens/AdminInfoScreen";
-import ProductScreen from "./screens/ProductScreen";
-import CartScreen from "./screens/CartScreen";
-import LoginScreen from "./screens/LoginScreen";
-import RegisterScreen from "./screens/RegisterScreen";
-import ProfileScreen from "./screens/ProfileScreen";
-import ShippingScreen from "./screens/ShippingScreen";
-import PaymentScreen from "./screens/PaymentScreen";
-import PlaceOrderScreen from "./screens/PlaceOrderScreen";
-import OrderScreen from "./screens/OrderScreen";
-import UserListScreen from "./screens/UserListScreen";
-import UserEditScreen from "./screens/UserEditScreen";
-import ProductListScreen from "./screens/ProductListScreen";
-import ProductEditScreen from "./screens/ProductEditScreen";
-import OrderListScreen from "./screens/OrderListScreen";
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Container } from 'react-bootstrap';
+import { Outlet } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
+//import { logout } from './slices/authSlice';
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const expirationTime = localStorage.getItem('expirationTime');
+    if (expirationTime) {
+      const currentTime = new Date().getTime();
+
+      if (currentTime > expirationTime) {
+        dispatch(logout());
+      }
+    }
+  }, [dispatch]);
+
   return (
-    <Router>
-      <>
-        <Header />
-        <main className="py-5">
-          <Container>
-            <Route path="/" component={HomeScreen} exact />
-            {/* Search route */}
-            <Route path="/search/:keyword" component={HomeScreen} exact />
-            {/* Page */}
-            <Route path="/page/:pageNumber" component={HomeScreen} exact />
-            <Route
-              path="/search/:keyword/page/:pageNumber"
-              component={HomeScreen}
-              exact
-            />
-            <Route path="/admininfo" component={AdminIndfoScreen} />
-
-            <Route path="/cart/:id?" component={CartScreen} />
-            <Route path="/order/:id" component={OrderScreen} />
-            <Route path="/shipping" component={ShippingScreen} />
-            <Route path="/payment" component={PaymentScreen} />
-            <Route path="/placeorder" component={PlaceOrderScreen} />
-
-            <Route path="/login" component={LoginScreen} />
-            <Route path="/register" component={RegisterScreen} />
-            <Route path="/profile" component={ProfileScreen} />
-            <Route path="/product/:id" component={ProductScreen} />
-
-            {/* Admin Screens */}
-            <Route path="/admin/userList" component={UserListScreen} />
-            <Route path="/admin/user/:id/edit" component={UserEditScreen} />
-            <Route
-              path="/admin/productList"
-              component={ProductListScreen}
-              exact
-            />
-            <Route
-              path="/admin/productList/:pageNumber"
-              component={ProductListScreen}
-              exact
-            />
-
-            <Route
-              path="/admin/product/:id/edit"
-              component={ProductEditScreen}
-            />
-            <Route path="/admin/orderList" component={OrderListScreen} />
-          </Container>
-        </main>
-        <Footer />
-      </>
-    </Router>
+    <>
+      <ToastContainer />
+      <Header />
+      <main className='py-3'>
+        <Container>
+          <Outlet />
+        </Container>
+      </main>
+      <Footer />
+    </>
   );
 };
 
