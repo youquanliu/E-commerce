@@ -3,11 +3,11 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
-import { listProductDetails, updateProduct } from '../actions/productActions'
-import FormContainer from '../components/FormContainer'
-import { PRODUCT_UPDATE_RESET } from '../constants/productConstants'
+import Message from '../../components/Message'
+import Loader from '../../components/Loader'
+import { listProductDetails, updateProduct } from '../../actions/productActions'
+import FormContainer from '../../components/FormContainer'
+import { PRODUCT_UPDATE_RESET } from '../../constants/productConstants'
 
 const ProductEditScreen = ({ match, history }) => {
     const productId = match.params.id
