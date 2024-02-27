@@ -8,7 +8,6 @@ import Footer from "./components/Footer";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import HomeScreen from "./screens/HomeScreen";
 
 //temp dummy variable
 let logout = "fake";
@@ -34,7 +33,6 @@ const App = () => {
       <main className="py-3">
         <Container>
           <Outlet />
-          <HomeScreen />
         </Container>
       </main>
       <Footer />
