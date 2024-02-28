@@ -2,7 +2,9 @@ import express from "express";
 import products from "./data/products.js";
 
 // import path from "path";
-// import dotenv from "dotenv";
+import dotenv from "dotenv";
+dotenv.config();
+
 // import colors from "colors";
 // import morgan from "morgan";
 // import connectDB from "./config/db.js";
@@ -13,9 +15,7 @@ import products from "./data/products.js";
 
 // import { notFound, errorHandle } from "./middleware/errorMiddleware.js";
 
-const port = 5000;
-
-// dotenv.config();
+const port = process.env.PORT || 5000;
 
 // connectDB();
 
@@ -66,8 +66,6 @@ app.get("/api/products/:id", (req, res) => {
 // //Custom Error handling middleware
 // app.use(notFound);
 // app.use(errorHandle);
-
-// const PORT = process.env.PORT || 5000;
 
 // app.listen(
 //   PORT,
