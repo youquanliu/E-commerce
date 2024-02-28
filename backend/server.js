@@ -1,65 +1,80 @@
-import express from 'express'
-import path from 'path'
-import dotenv from 'dotenv'
-import colors from 'colors'
-import morgan from 'morgan'
-import connectDB from './config/db.js'
-import productRoutes from './routes/productRoutes.js'
-import userRoutes from './routes/userRoutes.js'
-import orderRoutes from './routes/orderRoutes.js'
-import uploadRoutes from './routes/uploadRoute.js'
+import express from "express";
+import products from "./data/products.js";
 
-import { notFound, errorHandle } from './middleware/errorMiddleware.js'
+// import path from "path";
+// import dotenv from "dotenv";
+// import colors from "colors";
+// import morgan from "morgan";
+// import connectDB from "./config/db.js";
+// import productRoutes from "./routes/productRoutes.js";
+// import userRoutes from "./routes/userRoutes.js";
+// import orderRoutes from "./routes/orderRoutes.js";
+// import uploadRoutes from "./routes/uploadRoute.js";
 
-dotenv.config()
+// import { notFound, errorHandle } from "./middleware/errorMiddleware.js";
 
-connectDB()
+const port = 5000;
 
-const app = express()
+// dotenv.config();
 
-//only run morgan on devlopnment mode
-if (process.env.NODE_ENV === 'development') {
-    app.use(morgan('dev'))
-}
-//accept json data in body
-app.use(express.json())
+// connectDB();
 
+const app = express();
+app.get("/", (req, res) => res.send("API is running"));
 
-app.use('/api/products', productRoutes)
-app.use('/api/users', userRoutes)
-app.use('/api/orders', orderRoutes)
-app.use('/api/upload', uploadRoutes)
+app.get("/api/products", (req, res) => res.json(products));
 
-//PayPal Route
-app.get('/api/config/paypal', (req, res) =>
-    res.send(process.env.PAYPAL_CLIENT_ID))
+app.get("/api/products/:id", (req, res) => {
+  const product = products.find((p) => p._id === req.params.id);
+  res.json(product);
+});
 
-//Make uploads folder accessible by setting to static
-const __dirname = path.resolve()
-app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
+// //only run morgan on devlopnment mode
+// if (process.env.NODE_ENV === "development") {
+//   app.use(morgan("dev"));
+// }
+// //accept json data in body
+// app.use(express.json());
 
-//In production mode, set 'build' to static folder
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '/frontend/build')))
+// app.use("/api/products", productRoutes);
+// app.use("/api/users", userRoutes);
+// app.use("/api/orders", orderRoutes);
+// app.use("/api/upload", uploadRoutes);
 
-    app.get('*', (req, res) =>
-        res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
-    )
-} else {
-    app.get('/', (req, res) => {
-        res.send('API is running....')
-    })
-}
+// //PayPal Route
+// app.get("/api/config/paypal", (req, res) =>
+//   res.send(process.env.PAYPAL_CLIENT_ID)
+// );
 
+// //Make uploads folder accessible by setting to static
+// const __dirname = path.resolve();
+// app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
-//Custom Error handling middleware 
-app.use(notFound)
-app.use(errorHandle)
+// //In production mode, set 'build' to static folder
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname, "/frontend/build")));
 
-const PORT = process.env.PORT || 5000
+//   app.get("*", (req, res) =>
+//     res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
+//   );
+// } else {
+//   app.get("/", (req, res) => {
+//     res.send("API is running....");
+//   });
+// }
 
-app.listen(
-    PORT,
-    console.log(`server running in ${process.env.NODE_ENV} mode on port ${PORT}`.rainbow.underline.bold)
-)
+// //Custom Error handling middleware
+// app.use(notFound);
+// app.use(errorHandle);
 
+// const PORT = process.env.PORT || 5000;
+
+// app.listen(
+//   PORT,
+//   console.log(
+//     `server running in ${process.env.NODE_ENV} mode on port ${PORT}`.rainbow
+//       .underline.bold
+//   )
+// );
+
+app.listen(port, () => console.log(`server running in  mode on port ${port}`));
