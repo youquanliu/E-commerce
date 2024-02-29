@@ -7,7 +7,7 @@ dotenv.config();
 
 // import colors from "colors";
 // import morgan from "morgan";
-// import connectDB from "./config/db.js";
+import connectDB from "./config/db.js";
 // import productRoutes from "./routes/productRoutes.js";
 // import userRoutes from "./routes/userRoutes.js";
 // import orderRoutes from "./routes/orderRoutes.js";
@@ -17,7 +17,7 @@ dotenv.config();
 
 const port = process.env.PORT || 5000;
 
-// connectDB();
+connectDB();
 
 const app = express();
 app.get("/", (req, res) => res.send("API is running"));
