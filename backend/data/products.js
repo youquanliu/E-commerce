@@ -1,3 +1,5 @@
+//Below is the dummy data for backend data fetching test 
+
 const products = [
   {
     _id: "1",
