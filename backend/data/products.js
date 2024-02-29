@@ -2,7 +2,6 @@
 
 const products = [
   {
-    _id: "1",
     name: "Money Toilet Paper",
     image: "/images/toiletpaper01.jpg",
     description:
@@ -22,7 +21,6 @@ const products = [
     },
   },
   {
-    _id: "2",
     name: "Cactus Toilet Paper",
     image: "/images/toiletpaper10.jpg",
     description: "100% organic for you organic lovers",
@@ -34,7 +32,6 @@ const products = [
     numReviews: 14,
   },
   {
-    _id: "3",
     name: "Yo Mama Toilet Roll",
     image: "/images/toiletpaper11.jpeg",
     description:
@@ -47,7 +44,6 @@ const products = [
     numReviews: 9,
   },
   {
-    _id: "4",
     name: "Save Lives and Underwear With the Emergency",
     image: "/images/toiletpaper12.jpeg",
     description:
@@ -60,7 +56,6 @@ const products = [
     numReviews: 41,
   },
   {
-    _id: "5",
     name: "Educational Toilet Experiences With 'the Things We Didn't Know Loo Roll'",
     image: "/images/toiletpaper13.jpeg",
     description:
@@ -73,7 +68,6 @@ const products = [
     numReviews: 14,
   },
   {
-    _id: "6",
     name: "The Gags-Donald Trump Toilet Paper",
     image: "/images/toiletpaper04.jpg",
     description:
@@ -87,7 +81,6 @@ const products = [
   },
 
   {
-    _id: "7",
     name: "Maze Puzzle Toilet Paper",
     image: "/images/toiletpaper15.jpeg",
     description:
@@ -100,7 +93,6 @@ const products = [
     numReviews: 4,
   },
   {
-    _id: "8",
     name: "Sudoku Toilet Paper",
     image: "/images/toiletpaper02.jpg",
     description:
@@ -113,7 +105,6 @@ const products = [
     numReviews: 8,
   },
   {
-    _id: "9",
     name: "Black Toilet Paper",
     image: "/images/toiletpaper03.jpg",
     description:
@@ -127,7 +118,6 @@ const products = [
   },
 
   {
-    _id: "10",
     name: "Origami Toilet Paper",
     image: "/images/toiletpaper05.jpg",
     description:
@@ -140,7 +130,6 @@ const products = [
     numReviews: 10,
   },
   {
-    _id: "11",
     name: "Valentine’s Day Toilet Paper",
     image: "/images/toiletpaper06.jpg",
     description:
@@ -153,7 +142,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: "12",
     name: "Horror Story Toilet Paper",
     image: "/images/toiletpaper07.jpg",
     description:
@@ -166,7 +154,6 @@ const products = [
     numReviews: 11,
   },
   {
-    _id: "13",
     name: "Notepad Toilet Paper",
     image: "/images/toiletpaper08.jpg",
     description:
@@ -179,7 +166,6 @@ const products = [
     numReviews: 16,
   },
   {
-    _id: "14",
     name: "This Novelty Toilet Paper is Perfect for Hunters and Fishers",
     image: "/images/toiletpaper14.jpeg",
     description:
@@ -192,7 +178,6 @@ const products = [
     numReviews: 8,
   },
   {
-    _id: "15",
     name: "Glow in the Dark Toilet Paper",
     image: "/images/toiletpaper09.jpg",
     description:
@@ -205,7 +190,6 @@ const products = [
     numReviews: 4,
   },
   {
-    _id: "16",
     name: "Test",
     image: "/images/sample.png",
     description: "this is a sample item",
