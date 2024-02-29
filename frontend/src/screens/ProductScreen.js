@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 import {
   Row,
   Col,
@@ -19,13 +20,19 @@ import {
   createProductReview,
 } from "../actions/productActions";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
-import products from "../product";
 
 const ProductScreen = () => {
-  const { id } = useParams();
-  const productId = Number(id);
+  const [product, setProduct] = useState({});
 
-  const product = products.find((p) => p._id === productId);
+  const { id: productId } = useParams();
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const { data } = await axios.get(`/api/products/${productId}`);
+      setProduct(data);
+    };
+    fetchProduct();
+  }, [productId]);
 
   return (
     <>

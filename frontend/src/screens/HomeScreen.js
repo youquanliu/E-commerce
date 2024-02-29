@@ -1,8 +1,10 @@
+import { useEffect, useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useGetProductsQuery } from "../slices/productsApiSlice";
 import { Link } from "react-router-dom";
 import Product from "../components/Product";
+import axios from "axios";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Paginate from "../components/Paginate";
@@ -12,12 +14,21 @@ import Meta from "../components/Meta"; //Dummy data for display
 import products from "../product";
 
 const HomeScreen = () => {
+  const [products, setProducts] = useState([]);
   const { pageNumber, keyword } = useParams();
 
   const { data, isLoading, error } = useGetProductsQuery({
     keyword,
     pageNumber,
   });
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const { data } = await axios.get(`/api/products`);
+      setProducts(data);
+    };
+    fetchProducts();
+  }, []);
 
   return (
     <>
