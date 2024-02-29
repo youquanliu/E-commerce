@@ -8,7 +8,7 @@ const orderSchema = mongoose.Schema(
             required: true,
             ref: 'User',
         },
-        //one order has many items; one item has many products
+        //using array bc one order has many items; one item has many products
         orderItems: [
             {
                 name: { type: String, required: true },
