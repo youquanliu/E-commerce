@@ -12,7 +12,7 @@ import productRoutes from "./routes/productRoutes.js";
 // import orderRoutes from "./routes/orderRoutes.js";
 // import uploadRoutes from "./routes/uploadRoute.js";
 
-// import { notFound, errorHandle } from "./middleware/errorMiddleware.js";
+import { notFound, errorHandle } from "./middleware/errorMiddleware.js";
 
 const port = process.env.PORT || 5000;
 
@@ -56,9 +56,12 @@ app.use("/api/products", productRoutes);
 // }
 
 // //Custom Error handling middleware
-// app.use(notFound);
-// app.use(errorHandle);
+app.use(notFound);
+app.use(errorHandle);
 
 app.listen(port, () =>
-  console.log(`server running in ${process.env.NODE_ENV} mode on port ${port}`.rainbow.underline.bold)
+  console.log(
+    `server running in ${process.env.NODE_ENV} mode on port ${port}`.rainbow
+      .underline.bold
+  )
 );
