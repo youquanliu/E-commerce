@@ -11,7 +11,6 @@ import Paginate from "../components/Paginate";
 import ProductCarousel from "../components/ProductCarousel";
 import Meta from "../components/Meta"; //Dummy data for display
 //Dummy data for display
-import products from "../product";
 
 const HomeScreen = () => {
   const [products, setProducts] = useState([]);
