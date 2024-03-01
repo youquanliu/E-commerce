@@ -39,7 +39,7 @@ const ProductScreen = () => {
       {isLoading ? (
         <Loader />
       ) : error ? (
-        <Messagege variant="danger">
+        <Message variant="danger">
           {error?.data?.message || error.error}
         </Message>
       ) : (
