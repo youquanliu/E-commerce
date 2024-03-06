@@ -11,25 +11,13 @@ const authUser = asyncHandler(async (req, res) => {
 
   //password is in plain text, we need to bcrypt in user Model
   if (user && (await user.matchPassword(password))) {
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "7d",
-    });
-
-    // Set JWT as HTTP only token
-    res.cookie("jwt", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV !== "development",
-      sameSite: "strict",
-      maxAge: 7 * 24 * 60 * 60 * 1000, //7days
-    });
-
+    generateToken(res, user._id);
     res.json({
       _id: user._id,
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
       //Return JWT to Brower as payload
-      token: generateToken(user._id),
     });
   } else {
     res.status(401);
@@ -54,12 +42,13 @@ const registerUser = asyncHandler(async (req, res) => {
     password,
   });
   if (user) {
+    generateToken(res, user._id);
+
     res.status(201).json({
       _id: user._id,
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      token: generateToken(user._id),
     });
   } else {
     res.status(400);
