@@ -1,6 +1,7 @@
 import User from "../models/userModel.js";
 import asyncHandler from "../middleware/asyncHandler.js";
 import generateToken from "../utils/generateToken.js";
+import jwt from "jsonwebtoken";
 
 //@desc Auth user & get token
 //@Route POST /api/users/login
@@ -10,6 +11,18 @@ const authUser = asyncHandler(async (req, res) => {
 
   //password is in plain text, we need to bcrypt in user Model
   if (user && (await user.matchPassword(password))) {
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
+
+    // Set JWT as HTTP only token
+    res.cookie("jwt", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV !== "development",
+      sameSite: "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000, //7days
+    });
+
     res.json({
       _id: user._id,
       name: user.name,
