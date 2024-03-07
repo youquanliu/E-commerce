@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,11 +22,11 @@ const LoginScreen = ({ location, history }) => {
   //       history.push(redirect);
   //     }
   //   }, [history, userInfo, redirect]);
-  useEffect(() => {}, []);
 
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(login(email, password));
+    console.log("submit");
   };
 
   return (
@@ -35,7 +35,7 @@ const LoginScreen = ({ location, history }) => {
       {/* {error && <Message variant="danger">{error}</Message>} */}
       {/* {loading && <Loader />} */}
       <Form onSubmit={submitHandler}>
-        <Form.Group controlId="email">
+        <Form.Group controlId="email" className="my-3">
           <Form.Label>Email Address</Form.Label>
           <Form.Control
             type="email"
@@ -44,7 +44,7 @@ const LoginScreen = ({ location, history }) => {
             onChange={(e) => setEmail(e.target.value)}
           ></Form.Control>
         </Form.Group>
-        <Form.Group controlId="password">
+        <Form.Group controlId="password" className="my-3">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
@@ -53,7 +53,7 @@ const LoginScreen = ({ location, history }) => {
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
-        <Button type="submit" variant="success">
+        <Button type="submit" variant="info" className="my-3">
           Sign In
         </Button>
       </Form>
