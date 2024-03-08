@@ -1,39 +1,47 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { login } from "../actions/userActions";
 import FormContainer from "../components/FormContainer";
+import { useLoginMutation } from "../slices/usersApiSlice";
+import { setCredentials } from "../slices/authSlice";
+import { toast } from "react-toastify";
 
-const LoginScreen = ({ location, history }) => {
+const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
-  const userLogin = useSelector((state) => state.userLogin);
-  //const { loading, error, userInfo } = userLogin;
-  const redirect = false;
-  //const redirect = location.search ? location.search.split("=")[1] : "/";
+  const navigate = useNavigate();
+  const [login, { isLoading }] = useLoginMutation();
 
-  //   useEffect(() => {
-  //     if (userInfo) {
-  //       history.push(redirect);
-  //     }
-  //   }, [history, userInfo, redirect]);
+  const { userInfo } = useSelector((state) => state.auth);
+  const { search } = useLocation();
 
-  const submitHandler = (e) => {
+  const sp = new URLSearchParams(search);
+  const redirect = sp.get("redirect") || "/";
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [userInfo, redirect, navigate]);
+
+  const submitHandler = async (e) => {
     e.preventDefault();
-    dispatch(login(email, password));
-    console.log("submit");
+    try {
+      const res = await login({ email, password }).unwrap();
+      dispatch(setCredentials({ ...res }));
+      navigate(redirect);
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
   };
 
   return (
     <FormContainer>
       <h1>Sign In</h1>
-      {/* {error && <Message variant="danger">{error}</Message>} */}
-      {/* {loading && <Loader />} */}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="email" className="my-3">
           <Form.Label>Email Address</Form.Label>
@@ -53,9 +61,15 @@ const LoginScreen = ({ location, history }) => {
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
-        <Button type="submit" variant="info" className="my-3">
+        <Button
+          type="submit"
+          variant="info"
+          className="my-3"
+          disabled={isLoading}
+        >
           Sign In
         </Button>
+        {isLoading && <Loader />}
       </Form>
 
       <Row className="py-3">
