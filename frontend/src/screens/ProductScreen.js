@@ -21,7 +21,6 @@ import {
   createProductReview,
 } from "../actions/productActions";
 import { addToCart } from "../slices/cartSlice";
-import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 
 const ProductScreen = () => {
   const { id: productId } = useParams();
