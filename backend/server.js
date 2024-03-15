@@ -40,10 +40,10 @@ app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
 // app.use("/api/upload", uploadRoutes);
 
-// //PayPal Route
-// app.get("/api/config/paypal", (req, res) =>
-//   res.send(process.env.PAYPAL_CLIENT_ID)
-// );
+//PayPal Route
+app.get("/api/config/paypal", (req, res) =>
+  res.send({ clientId: process.env.PAYPAL_CLIENT_ID })
+);
 
 // //Make uploads folder accessible by setting to static
 // const __dirname = path.resolve();
