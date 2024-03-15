@@ -226,8 +226,7 @@ const OrderScreen = () => {
                       >
                         Test Pay Order
                       </Button> */}
-
-                      <div>
+                      <div style={{ marginTop: "15px" }}>
                         <PayPalButtons
                           createOrder={createOrder}
                           onApprove={onApprove}
