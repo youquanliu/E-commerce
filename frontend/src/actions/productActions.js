@@ -21,7 +21,7 @@ import {
     PRODUCT_CREATE_REVIEW_REQUEST,
     PRODUCT_CREATE_REVIEW_SUCCESS,
     PRODUCT_CREATE_REVIEW_FAIL,
-} from '../constants/productConstants.js'
+} from '../constants/productConstants'
 
 //listproduct action
 export const listProducts = (keyword = '', pageNumber = '') => async (dispatch) => {
