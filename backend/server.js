@@ -1,6 +1,6 @@
 import express from "express";
 
-// import path from "path";
+import path from "path";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 dotenv.config();
@@ -11,7 +11,7 @@ import connectDB from "./config/db.js";
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
-// import uploadRoutes from "./routes/uploadRoute.js";
+import uploadRoutes from "./routes/uploadRoute.js";
 
 import { notFound, errorHandle } from "./middleware/errorMiddleware.js";
 
@@ -38,7 +38,7 @@ app.get("/", (req, res) => res.send("API is running"));
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
-// app.use("/api/upload", uploadRoutes);
+app.use("/api/upload", uploadRoutes);
 
 //PayPal Route
 app.get("/api/config/paypal", (req, res) =>
@@ -46,8 +46,8 @@ app.get("/api/config/paypal", (req, res) =>
 );
 
 // //Make uploads folder accessible by setting to static
-// const __dirname = path.resolve();
-// app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+const __dirname = path.resolve();
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 // //In production mode, set 'build' to static folder
 // if (process.env.NODE_ENV === "production") {
