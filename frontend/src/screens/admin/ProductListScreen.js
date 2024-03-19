@@ -18,14 +18,15 @@ const ProductListScreen = () => {
   const { data, isLoading, error, refetch } = useGetProductsQuery({
     pageNumber,
   });
-  console.log(data);
+
   const [deleteProduct, { isLoading: loadingDelete }] =
     useDeleteProductMutation();
 
   const deleteHandler = async (id) => {
-    if (window.confirm("Are you sure")) {
+    if (window.confirm("Are you sure to DELETE")) {
       try {
         await deleteProduct(id);
+        toast.success("Product deleted:)");
         refetch();
       } catch (err) {
         toast.error(err?.data?.message || err.error);
