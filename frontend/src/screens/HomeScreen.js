@@ -8,16 +8,11 @@ import Message from "../components/Message";
 import Paginate from "../components/Paginate";
 import ProductCarousel from "../components/ProductCarousel";
 import Meta from "../components/Meta"; //Dummy data for display
-//Dummy data for display
 
 const HomeScreen = () => {
   const { pageNumber, keyword } = useParams();
 
-  const {
-    data: products,
-    isLoading,
-    error,
-  } = useGetProductsQuery({
+  const { data, isLoading, error } = useGetProductsQuery({
     keyword,
     pageNumber,
   });
@@ -27,18 +22,21 @@ const HomeScreen = () => {
       {isLoading ? (
         <Loader />
       ) : error ? (
-        <Message variant='danger'>{error?.data?.message || error.error}</Message>
+        <Message variant="danger">
+          {error?.data?.message || error.error}
+        </Message>
       ) : (
         <>
           <h1>Latest Products</h1>
           <Row>
-            {products.map((product) => (
+            {data.products.map((product) => (
               <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
                 <h3>{product.name}</h3>
                 <Product product={product} />
               </Col>
             ))}
           </Row>
+          <Paginate pages={data.pages} page={data.page} />
         </>
       )}
     </>
