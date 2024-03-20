@@ -14,20 +14,21 @@ const getProducts = asyncHandler(async (req, res) => {
   //         },
   //       }
   //     : {};
+
   //Pagination code
-  //***********************       amount of products would show on page     ********************************
-  //   const pageSize = 8;
-  //   const page = Number(req.query.pageNumber) || 1;
+  //***********************
+  //amount of products would show on page
+  //***********************
+  const pageSize = 8;
+  const page = Number(req.query.pageNumber) || 1;
 
-  //   const count = await Product.countDocuments({ ...keyword });
-  //   const products = await Product.find({ ...keyword })
-  //     .limit(pageSize)
-  //     .skip(pageSize * (page - 1)); //skip products in previous page
+  const count = await Product.countDocuments();
 
-  //   res.json({ products, page, pages: Math.ceil(count / pageSize) });
+  const products = await Product.find()
+    .limit(pageSize)
+    .skip(pageSize * (page - 1)); //skip products in previous page
 
-  const products = await Product.find({});
-  res.json(products);
+  res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
 //@desc Fetch products by ID
@@ -119,7 +120,6 @@ const createProductReview = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
 
   if (product) {
-    
     const alreadyReviewed = product.reviews.find(
       (r) => r.user.toString() === req.user._id.toString()
     );
