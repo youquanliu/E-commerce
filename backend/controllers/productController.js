@@ -6,14 +6,14 @@ import asyncHandler from "../middleware/asyncHandler.js";
 //@access public
 const getProducts = asyncHandler(async (req, res) => {
   //Search bar code
-  //   const keyword = req.query.keyword
-  //     ? {
-  //         name: {
-  //           $regex: req.query.keyword,
-  //           $options: "i", //case insensitive
-  //         },
-  //       }
-  //     : {};
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: "i", //case insensitive
+        },
+      }
+    : {};
 
   //Pagination code
   //***********************
@@ -22,9 +22,9 @@ const getProducts = asyncHandler(async (req, res) => {
   const pageSize = 8;
   const page = Number(req.query.pageNumber) || 1;
 
-  const count = await Product.countDocuments();
+  const count = await Product.countDocuments({ ...keyword });
 
-  const products = await Product.find()
+  const products = await Product.find({ ...keyword })
     .limit(pageSize)
     .skip(pageSize * (page - 1)); //skip products in previous page
 
