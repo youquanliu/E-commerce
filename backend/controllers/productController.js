@@ -50,7 +50,7 @@ const getProductById = asyncHandler(async (req, res) => {
 //@access public
 const getTopProduct = asyncHandler(async (req, res) => {
   const products = await Product.find({}).sort({ rating: -1 }).limit(4);
-  res.json(products);
+  res.status(200).json(products);
 });
 
 //@desc Delete a products
