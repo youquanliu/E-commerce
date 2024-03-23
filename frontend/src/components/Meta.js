@@ -1,4 +1,3 @@
-import React from "react";
 import { Helmet } from "react-helmet-async";
 
 const Meta = ({ title, description, keywords }) => {
@@ -12,7 +11,7 @@ const Meta = ({ title, description, keywords }) => {
 };
 
 Meta.defaultProps = {
-  title: "Welcome to Frank's Toilet Paper Depot",
+  title: "Frank's Toilet Paper Depot",
   description: "We sell the best products for cheap",
   keywords: "toliet paper, creative toliet paper, toliet",
 };

@@ -7,7 +7,7 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Paginate from "../components/Paginate";
 import ProductCarousel from "../components/ProductCarousel";
-import Meta from "../components/Meta"; //Dummy data for display
+import Meta from "../components/Meta";
 
 const HomeScreen = () => {
   const { pageNumber, keyword } = useParams();
@@ -22,7 +22,7 @@ const HomeScreen = () => {
       {!keyword ? (
         <ProductCarousel />
       ) : (
-        <Link to="/" className="btn btn-info mg-4">
+        <Link to="/" className="btn btn-light mb-4">
           Go Back
         </Link>
       )}
@@ -34,13 +34,8 @@ const HomeScreen = () => {
         </Message>
       ) : (
         <>
-          {keyword ? (
-            <h1 className="mt-4">
-              <Row>The search result for "{keyword}"</Row>
-            </h1>
-          ) : (
-            <h1>Latest Products</h1>
-          )}
+          <Meta />
+          <h1>Latest Products</h1>
           <Row>
             {data.products.map((product) => (
               <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
