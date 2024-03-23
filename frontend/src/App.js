@@ -4,13 +4,10 @@ import { Container } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-//import { logout } from './slices/authSlice';
+import { logout } from './slices/authSlice';
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-//temp dummy variable
-let logout = "fake";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -30,7 +27,7 @@ const App = () => {
     <>
       <ToastContainer />
       <Header />
-      <main className="py-3">
+      <main className="py-5">
         <Container>
           <Outlet />
         </Container>
