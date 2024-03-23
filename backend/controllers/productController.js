@@ -6,6 +6,9 @@ import asyncHandler from "../middleware/asyncHandler.js";
 //@access public
 const getProducts = asyncHandler(async (req, res) => {
   //Search bar code
+  const pageSize = process.env.PAGINATION_LIMIT;
+  const page = Number(req.query.pageNumber) || 1;
+  
   const keyword = req.query.keyword
     ? {
         name: {
@@ -19,8 +22,6 @@ const getProducts = asyncHandler(async (req, res) => {
   //***********************
   //amount of products would show on page
   //***********************
-  const pageSize = 8;
-  const page = Number(req.query.pageNumber) || 1;
 
   const count = await Product.countDocuments({ ...keyword });
 
