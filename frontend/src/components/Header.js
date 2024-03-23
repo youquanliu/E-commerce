@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { Navbar, Nav, Container, NavDropdown, Badge } from "react-bootstrap";
-import { FaShoppingCart, FaUser } from "react-icons/fa";
+import { FaShoppingCart, FaUser, FaQuestionCircle } from "react-icons/fa";
 import logo from "../assets/logo192.png";
 import SearchBar from "./SearchBar";
 import { useLogoutMutation } from "../slices/usersApiSlice";
@@ -62,8 +62,7 @@ const Header = () => {
               ) : (
                 <LinkContainer to="/login">
                   <Nav.Link>
-                    <FaUser />
-                    Sign In
+                    <FaUser /> Sign In
                   </Nav.Link>
                 </LinkContainer>
               )}
@@ -80,6 +79,11 @@ const Header = () => {
                   </LinkContainer>
                 </NavDropdown>
               )}
+              <LinkContainer to="/admininfo">
+                <Nav.Link>
+                  <FaQuestionCircle /> Admin
+                </Nav.Link>
+              </LinkContainer>
             </Nav>
           </Navbar.Collapse>
         </Container>
