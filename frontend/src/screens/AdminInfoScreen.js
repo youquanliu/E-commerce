@@ -1,13 +1,23 @@
 import { Card, Button } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { useLogoutMutation } from "../slices/usersApiSlice";
+import { logout } from "../slices/authSlice";
 
 const AdminIndfoScreen = () => {
   const navigate = useNavigate();
+  const [logoutApiCall] = useLogoutMutation();
+  const dispatch = useDispatch();
 
-  const logoutHandler = () => {
-    navigate("/");
+  const logoutHandle = async () => {
+    try {
+      await logoutApiCall().unwrap();
+      dispatch(logout());
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
   };
-
   return (
     <>
       <Card>
@@ -35,7 +45,7 @@ const AdminIndfoScreen = () => {
           <Card.Text className="text-danger">
             * Please only delete products or users created by You
           </Card.Text>
-          <Button variant="info" onClick={logoutHandler}>
+          <Button variant="info" onClick={logoutHandle}>
             <Link to="/login" className="btn-sm btn-info">
               Go log-in
             </Link>
