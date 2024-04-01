@@ -1,7 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+// customed style
 import "./assets/styles/bootstrap.custom.css";
-import "./bootstrap.min.css";
+// Sketchy theme from Bootswatch
+import "./assets/styles/bootstrap.min.css";
 import "./assets/styles/index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
