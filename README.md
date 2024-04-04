@@ -1,6 +1,6 @@
 # E-commerce
 
-> Build an [Toilet Paper Depot](https://toliet-paper-depot.herokuapp.com) eCommerce platform from the ground up with React, Redux, Express & MongoDB
+> Build an [Toilet Paper Depot](https://toliet-paper-depot.herokuapp.com) eCommerce platform from the ground up with React, Redux Toolkit, Express & MongoDB
 
 ![Page One](frontend/public/images/Screenshot1.png?raw=true "First page of game")
 ![Page Two](frontend/public/images/Screenshot2.png?raw=true "Second page of game")
@@ -22,19 +22,27 @@
 - PayPal / credit card integration in sandbox
 - Database seeder (products & users)
 
-## Click to [view the page](https://toliet-paper-depot.herokuapp.com)
+## Click to [view the page](https://e-commerce-yr0n.onrender.com/)
+
+#### Usage
+
+- Create a MongoDB database and obtain your `MongoDB URI` - [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register)
+- Create a PayPal account and obtain your `Client ID` - [PayPal Developer](https://developer.paypal.com/)
+
 
 #### Env Variables
 
-Create a .env file in then root and add the following
+Rename the .env.example file to .env and add the following
 
 ```
 NODE_ENV = development
 PORT = 5000
 DATABASE_URL = your mongodb uri
-JWT_SECRET = 'abc123'
+JWT_SECRET = abc123
 PAYPAL_CLIENT_ID = your paypal client id
+PAGINATION_LIMIT = how many product item per page
 ```
+Change the JWT_SECRET and PAGINATION_LIMIT to what you want
 
 #### Install Dependencies (frontend & backend)
 
@@ -59,6 +67,19 @@ npm run server
 cd frontend
 npm run build
 ```
+
+#### Seed Database
+
+You can use the following commands to seed the database with some sample users and products as well as destroy all data
+
+```
+# Import data
+npm run data:import
+
+# Destroy data
+npm run data:destroy
+```
+
 ```
 Sample User Logins
 
